@@ -223,9 +223,9 @@ class MyConfig:
 
         # Putty上ではESC => ESC+日本語入力オフ（無変換）
         km["ESC"] = self.km.command_InputKey("(29)", "ESC")
-        km["C-(219)"] = self.km.command_InputKey("(29)", "C-(219)")
-        km["(243)"] = self.km.command_InputKey("(29)", "(243)")
-        km["(244)"] = self.km.command_InputKey("(29)", "(244)")
+        km["C-(219)"] = self.km.command_InputKey("(29)", "ESC")
+        km["(243)"] = self.km.command_InputKey("(29)", "ESC")
+        km["(244)"] = self.km.command_InputKey("(29)", "ESC")
 
         # putty上ではEmacs風割り当てを解除
         km["C-S"] = "C-S"
