@@ -75,11 +75,21 @@ class MyConfig:
         # S-[=> |
         self.km.replaceKey("(221)", "(220)")
         # 半角/全角 => `
-        self.kmg["(243)"] = "S-(192)"
-        self.kmg["(244)"] = "S-(192)"
+        #self.kmg["(243)"] = "S-(192)"
+        #self.kmg["(244)"] = "S-(192)"
         # S-半角/全角 => ~
-        self.kmg["S-(243)"] = "S-(222)"
-        self.kmg["S-(244)"] = "S-(222)"
+        #self.kmg["S-(243)"] = "S-(222)"
+        #self.kmg["S-(244)"] = "S-(222)"
+        # 半角/全角 => Esc
+        self.kmg["(243)"] = "Esc"
+        self.kmg["(244)"] = "Esc"
+        # S-半角/全角 => S-Esc
+        self.kmg["S-(243)"] = "S-Esc"
+        self.kmg["S-(244)"] = "S-Esc"
+        # Backspace => `
+        self.kmg["Back"] = "S-(192)"
+        # S-Backspace => ~
+        self.kmg["S-Back"] = "S-(222)"
         # @ => [
         # S-@ => {
         self.km.replaceKey("(192)", "(219)")
@@ -214,6 +224,8 @@ class MyConfig:
         # Putty上ではESC => ESC+日本語入力オフ（無変換）
         km["ESC"] = self.km.command_InputKey("(29)", "ESC")
         km["C-(219)"] = self.km.command_InputKey("(29)", "C-(219)")
+        km["(243)"] = self.km.command_InputKey("(29)", "(243)")
+        km["(244)"] = self.km.command_InputKey("(29)", "(244)")
 
         # putty上ではEmacs風割り当てを解除
         km["C-S"] = "C-S"
@@ -341,7 +353,7 @@ class MyConfig:
             self.set_multistroke("X" + k, "C-" + k)
 
         # カーソル移動無効化
-        for exe in ["ckw" ,"gvim" ,"firefox" ,"putty"]:
+        for exe in ["ckw" ,"gvim" ,"firefox" ,"putty", "mintty"]:
             exe_name = unicode(exe) + u".exe"
             km = self.km_for_exe(exe_name)
             for k in e_cursor.keys():
