@@ -80,6 +80,18 @@ class MyConfig:
         # S-半角/全角 => ~
         self.kmg["S-(243)"] = "S-(222)"
         self.kmg["S-(244)"] = "S-(222)"
+        # 半角/全角 => Esc
+        #self.kmg["(243)"] = "Esc"
+        #self.kmg["(244)"] = "Esc"
+        # S-半角/全角 => S-Esc
+        #self.kmg["S-(243)"] = "S-Esc"
+        #self.kmg["S-(244)"] = "S-Esc"
+        # Backspace => `
+        #self.kmg["Back"] = "S-(192)"
+        # S-Backspace => ~
+        #self.kmg["S-Back"] = "S-(222)"
+        # C-Backspace => C-`
+        #self.kmg["C-Back"] = "C-S-(192)"
         # @ => [
         # S-@ => {
         self.km.replaceKey("(192)", "(219)")
@@ -98,32 +110,42 @@ class MyConfig:
         # SandS
         # http://d.hatena.ne.jp/mobitan/20081128/1227792452
         self.km.replaceKey("Space", "LShift")
-        self.kmg["O-LShift" ] = "Space"
+        self.kmg["O-LShift"] = "Space"
+
+        # C-Space => S-Space
+        self.kmg["C-(226)"] = "S-Space"
 
         # ユーザモディファイアキーの定義
         self.km.defineModifier(235, "User0")
         self.km.defineModifier(236, "User1")
 
         # O-LWin => Tab
-        self.kmg["O-LWin"] = "Tab"
+        #self.kmg["O-LWin"] = "Tab"
         # S-LWin => S-Tab
-        self.kmg["S-LWin"] = "S-Tab"
+        #self.kmg["S-LWin"] = "S-Tab"
 
         # O-無変換 => User0
-        self.km.replaceKey("(29)", 235)
-        self.kmg["O-(235)" ] = "(29)"
+        #self.km.replaceKey("(29)", 235)
+        #self.kmg["O-(235)" ] = "(29)"
 
         ## O-変換 => User1
-        self.km.replaceKey("(28)", 236)
-        self.kmg["O-(236)"] = "(28)"
+        #self.km.replaceKey("(28)", 236)
+        #self.kmg["O-(236)"] = "(28)"
 
         # RShift => RCtrl
         # O-RShift => 変換
-        self.km.replaceKey("RShift", "RCtrl")
-        self.kmg["O-RCtrl"] = "28"
+        #self.km.replaceKey("RShift", "RCtrl")
+        #self.kmg["O-RCtrl"] = "28"
+        # RShift => U0
+        #self.km.replaceKey("RShift", 235)
+
+        # Esc => U0
+        # O-Esc => Esc
+        self.km.replaceKey("Escape", 235)
+        self.kmg["O-(235)"] = "Escape"
 
         # RCtrl => RWin
-        self.km.replaceKey("RCtrl", "RWin")
+        #self.km.replaceKey("RCtrl", "RWin")
 
         # Backspace => Backslash
         #self.km.replaceKey("BS", "(220)")
@@ -147,18 +169,20 @@ class MyConfig:
         #self.km.replaceKey("RWin", "RCtrl")
         #self.kmg["O-RCtrl"] = "(243)"
         #elf.kmg["O-RCtrl"] = "A-(25)"
+        # O-RWin => 変換
+        self.kmg["O-RWin"] = "(28)"
 
         # LAlt => LCtrl
         # LWin => LAlt
         #self.km.replaceKey("LAlt", "LCtrl")
         #self.km.replaceKey("LWin", "LAlt")
 
-        # LWin => 英数
-        ## LWin => 無変換
-        # O-LWin => U0
-        #self.km.replaceKey("LWin", 235)
+        ## LWin => 英数
+        # LWin => 無変換
+        # O-LWin => LWin
+        #self.km.replaceKey("LWin", 29)
         #self.kmg["O-(235)"] = "(240)"
-        #self.kmg["O-(235)"] = "(29)"
+        self.kmg["O-LWin"] = "(29)"
 
         # LCtrl => 英数
         #self.km.replaceKey("LCtrl", 29)
@@ -206,14 +230,18 @@ class MyConfig:
         for i in xrange(10):
             km["LC-" + str(i)] = self.km.command_InputKey("LC-Z", str(i))
         # C-Tab でウィンドウ移動
-        km["LC-LWin"] = self.km.command_InputKey("LC-Z", "Tab")
+        #km["LC-LWin"] = self.km.command_InputKey("LC-Z", "Tab")
+        km["LC-Tab"] = self.km.command_InputKey("LC-Z", "Tab")
         # U0/U1-Space でウィンドウ切り替え
         #km["U0-LShift"] = self.km.command_InputKey("LC-Z", "N")
         #km["U1-LShift"] = self.km.command_InputKey("LC-Z", "P")
 
         # Putty上ではESC => ESC+日本語入力オフ（無変換）
-        km["ESC"] = self.km.command_InputKey("(29)", "ESC")
-        km["C-(219)"] = self.km.command_InputKey("(29)", "C-(219)")
+        #km["ESC"] = self.km.command_InputKey("(29)", "ESC")
+        km["(235)"] = self.km.command_InputKey("(29)", "ESC")
+        km["C-(219)"] = self.km.command_InputKey("(29)", "ESC")
+        #km["(243)"] = self.km.command_InputKey("(29)", "ESC")
+        #km["(244)"] = self.km.command_InputKey("(29)", "ESC")
 
         # putty上ではEmacs風割り当てを解除
         km["C-S"] = "C-S"
@@ -249,7 +277,8 @@ class MyConfig:
         #km["U1-LShift"] = self.km.command_InputKey("LC-Z", "P")
 
         # Putty上ではESC => ESC+日本語入力オフ（無変換）
-        km["ESC"] = self.km.command_InputKey("(29)", "ESC")
+        #km["ESC"] = self.km.command_InputKey("(29)", "ESC")
+        km["(235)"] = self.km.command_InputKey("(29)", "ESC")
 
         # putty上ではEmacs風割り当てを解除
         km["C-S"] = "C-S"
@@ -276,7 +305,8 @@ class MyConfig:
         # GVim上ではESC => ESC+日本語入力オフ（無変換）
         # これは事前に IME の設定が必要
         km = self.km_for_exe(u"gvim.exe")
-        km["ESC"] = self.km.command_InputKey("(29)", "ESC")
+        #km["ESC"] = self.km.command_InputKey("(29)", "ESC")
+        km["(235)"] = self.km.command_InputKey("(29)", "ESC")
 
         # GVim上ではEmacs風割り当てを解除
         km = self.km_for_exe(u"gvim.exe")
@@ -341,11 +371,12 @@ class MyConfig:
             self.set_multistroke("X" + k, "C-" + k)
 
         # カーソル移動無効化
-        for exe in ["ckw" ,"gvim" ,"firefox" ,"putty"]:
+        for exe in ["ckw" ,"gvim" ,"firefox" ,"putty", "mintty"]:
             exe_name = unicode(exe) + u".exe"
             km = self.km_for_exe(exe_name)
             for k in e_cursor.keys():
                 km["LC-" + k] = "LC-" + k
+                km["LC-S-" + k] = "LC-S-" + k
 
     # Excel用設定
     def excel(self):
