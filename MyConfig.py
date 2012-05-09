@@ -75,8 +75,8 @@ class MyConfig:
         # S-[=> |
         self.km.replaceKey("(221)", "(220)")
         # 半角/全角 => `
-        self.kmg["(243)"] = "S-(192)"
-        self.kmg["(244)"] = "S-(192)"
+        #self.kmg["(243)"] = "S-(192)"
+        #self.kmg["(244)"] = "S-(192)"
         # S-半角/全角 => ~
         self.kmg["S-(243)"] = "S-(222)"
         self.kmg["S-(244)"] = "S-(222)"
